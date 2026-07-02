@@ -34,6 +34,7 @@ The output directory contains:
 - `calls.csv` — source/target/url/file/line relationships from log lines
 - `maltego_graph.dot` — Graphviz DOT graph
 - `maltego_graph.mmd` — Mermaid graph
+- `maltego_graph.graphml` — standard GraphML export for direct import into tools such as Maltego
 
 Render DOT with Graphviz:
 
@@ -55,6 +56,7 @@ dot -Tpng maltego_graph.dot -o maltego_graph.png
 7. Generates:
    - `maltego_graph.dot` (Graphviz directed graph with URL-labeled edges),
    - `maltego_graph.mmd` (Mermaid graph),
+   - `maltego_graph.graphml` (standard GraphML with node and edge metadata),
    - plus CSV artifacts for tabular analysis.
 
 ## Behavior notes
