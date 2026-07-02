@@ -132,6 +132,15 @@ xml_escape() {
   printf '%s' "$value"
 }
 
+is_valid_ipv4() {
+  local ip="$1"
+  local o1 o2 o3 o4
+
+  [[ "$ip" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]] || return 1
+  IFS='.' read -r o1 o2 o3 o4 <<<"$ip"
+  [ "$o1" -le 255 ] && [ "$o2" -le 255 ] && [ "$o3" -le 255 ] && [ "$o4" -le 255 ]
+}
+
 if [ -s "$ips_file" ]; then
   while IFS= read -r ip; do
     [ -n "$ip" ] || continue
@@ -246,7 +255,7 @@ register_graphml_node() {
     return 0
   fi
 
-  if [[ "$name" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
+  if is_valid_ipv4 "$name"; then
     node_type="ipv4"
   elif [ "$name" = "unknown_source" ]; then
     node_type="synthetic"
@@ -296,8 +305,12 @@ while IFS=',' read -r source target url file line_no; do
 done < "$calls_csv"
 
 {
+  graphml_schema_location="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"
   printf '<?xml version="1.0" encoding="UTF-8"?>\n'
-  printf '%s\n' '<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">'
+  printf '<graphml xmlns="%s" xmlns:xsi="%s" xsi:schemaLocation="%s">\n' \
+    "http://graphml.graphdrawing.org/xmlns" \
+    "http://www.w3.org/2001/XMLSchema-instance" \
+    "$graphml_schema_location"
   printf '  <key id="label" for="all" attr.name="label" attr.type="string"/>\n'
   printf '  <key id="name" for="node" attr.name="name" attr.type="string"/>\n'
   printf '  <key id="type" for="node" attr.name="type" attr.type="string"/>\n'
