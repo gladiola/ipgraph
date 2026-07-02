@@ -22,11 +22,11 @@ The output directory contains:
 
 - `ip_inventory.csv` — discovered IPv4s + Shodan open ports/geolocation/org
 - `calls.csv` — source/target/url/file/line relationships from log lines
-- `matego_graph.dot` — Graphviz DOT graph
-- `matego_graph.mmd` — Mermaid graph
+- `maltego_graph.dot` — Graphviz DOT graph
+- `maltego_graph.mmd` — Mermaid graph
 
 Render DOT with Graphviz:
 
 ```bash
-dot -Tpng matego_graph.dot -o matego_graph.png
+dot -Tpng maltego_graph.dot -o maltego_graph.png
 ```

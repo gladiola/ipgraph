@@ -93,8 +93,8 @@ fi
 
 ip_inventory_csv="$output_dir/ip_inventory.csv"
 calls_csv="$output_dir/calls.csv"
-graph_dot="$output_dir/matego_graph.dot"
-graph_mmd="$output_dir/matego_graph.mmd"
+graph_dot="$output_dir/maltego_graph.dot"
+graph_mmd="$output_dir/maltego_graph.mmd"
 
 printf 'ip,ports,country,city,org\n' > "$ip_inventory_csv"
 
@@ -143,7 +143,7 @@ if [ -s "$ip_inventory_csv" ]; then
 fi
 
 {
-  printf 'digraph matego {\n'
+  printf 'digraph maltego {\n'
   printf '  rankdir=LR;\n'
   printf '  node [shape=box, style=rounded];\n'
 
