@@ -71,6 +71,10 @@ for log_file in "$@"; do
     while IFS= read -r url; do
       printf '%s\t%s\t%s\t%s\n' "$log_file" "$line_index" "$url" "$line" >> "$url_rows"
     done < <(grep -oE "https?://[^ \"'<>)]+" <<<"$line" || true)
+
+    while IFS= read -r url; do
+      printf '%s\t%s\t%s\t%s\n' "$log_file" "$line_index" "$url" "$line" >> "$url_rows"
+    done < <(grep -oE "(GET|POST|PUT|DELETE|HEAD|OPTIONS|PATCH) /[^ \"'<>]+" <<<"$line" | sed -E 's/^[A-Z]+ //' || true)
   done < "$log_file"
 done
 
