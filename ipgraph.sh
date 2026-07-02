@@ -297,10 +297,7 @@ done < "$calls_csv"
 
 {
   printf '<?xml version="1.0" encoding="UTF-8"?>\n'
-  printf '<graphml xmlns="http://graphml.graphdrawing.org/xmlns"'
-  printf ' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"'
-  printf ' xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns'
-  printf ' http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">\n'
+  printf '%s\n' '<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">'
   printf '  <key id="label" for="all" attr.name="label" attr.type="string"/>\n'
   printf '  <key id="name" for="node" attr.name="name" attr.type="string"/>\n'
   printf '  <key id="type" for="node" attr.name="type" attr.type="string"/>\n'
